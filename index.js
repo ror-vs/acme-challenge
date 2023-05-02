@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 6000;
-var serveIndex = require("serve-index");
 
 // ******************************
 // ******************************
@@ -10,12 +9,18 @@ var serveIndex = require("serve-index");
 //import greenlock
 var Greenlock = require("greenlock");
 //green lock create instance
+var pkg = require("./package.json");
 var greenlock = Greenlock.create({
+  packageRoot: __dirname,
   configDir: "./greenlock",
 
-  packageAgent: "app",
+  // configDir: "./greenlock.d/",
+  packageAgent: pkg.name + "/" + pkg.version,
+  maintainerEmail: pkg.author,
 
-  packageRoot: __dirname + "/./",
+  // packageAgent: "app",
+
+  // packageRoot: __dirname + "/./",
 
   maintainerEmail: "mali1995ror@gmail.com",
 
@@ -28,19 +33,28 @@ var greenlock = Greenlock.create({
     }
   },
 });
+
 //greenlock defaults
-greenlock.manager.defaults({
-  agreeToTerms: true,
+greenlock.manager
+  .defaults({
+    agreeToTerms: true,
 
-  subscriberEmail: "mali1995ror@gmail.com",
+    subscriberEmail: "mali1995ror@gmail.com",
 
-  challenges: {
-    "http-01": {
-      module: "acme-http-01-webroot",
-      webroot: "/tmp/.well-known/acme-challenge",
+    challenges: {
+      "http-01": {
+        module: "acme-http-01-webroot",
+
+        webroot: "/tmp/.well-known/acme-challenge",
+      },
     },
-  },
-});
+  })
+  .then((res) => {
+    console.log(res, "res");
+  })
+  .catch((err) => {
+    console.log(err, "err");
+  });
 // ******************************
 // ******************************
 
@@ -61,11 +75,7 @@ app.use("/servername", function (req, res, next) {
 });
 // ******************************
 //middleware
-app.use(
-  "/.well-known",
-  express.static(".well-known"),
-  serveIndex(".well-known")
-);
+
 app.use(express.json());
 app.use(cors());
 //routes
@@ -126,7 +136,7 @@ async function getSSLForDomains(domains) {
 
   return results;
 }
-getSSLForDomains(["example.com"]);
+getSSLForDomains(["dev.winrateapp.com"]);
 //check if ssl exists for site
 async function getGreenLockSSL(servername) {
   return await greenlock.get({ servername: `${servername}` });
