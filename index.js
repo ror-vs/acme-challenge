@@ -119,7 +119,7 @@ async function getSSLForDomains(domains) {
 
   return results;
 }
-getSSLForDomains(["hrm.viralsquare.org"]);
+getSSLForDomains(["dev.winrateapp.com"]);
 //check if ssl exists for site
 async function getGreenLockSSL(servername) {
   return await greenlock.get({ servername: `${servername}` });
