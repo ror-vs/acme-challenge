@@ -1,0 +1,29 @@
+{
+  "defaults": {
+    "store": {
+      "module": "greenlock-store-fs"
+    },
+    "challenges": {
+      "http-01": {
+        "module": "acme-http-01-webroot",
+        "webroot": "/tmp/.well-known/acme-challenge"
+      }
+    },
+    "renewOffset": "-45d",
+    "renewStagger": "3d",
+    "accountKeyType": "EC-P256",
+    "serverKeyType": "RSA-2048",
+    "subscriberEmail": "mali1995ror@gmail.com",
+    "agreeToTerms": true
+  },
+  "sites": [
+    {
+      "subject": "example.com",
+      "altnames": [
+        "example.com",
+        "www.example.com"
+      ],
+      "renewAt": 1
+    }
+  ]
+}
