@@ -32,6 +32,14 @@
         "www.hrm.viralsquare.org"
       ],
       "renewAt": 1
+    },
+    {
+      "subject": "dev.winrateapp.com",
+      "altnames": [
+        "dev.winrateapp.com",
+        "www.dev.winrateapp.com"
+      ],
+      "renewAt": 1
     }
   ]
 }

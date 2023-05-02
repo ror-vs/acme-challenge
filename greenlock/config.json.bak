@@ -24,6 +24,22 @@
         "www.example.com"
       ],
       "renewAt": 1
+    },
+    {
+      "subject": "hrm.viralsquare.org",
+      "altnames": [
+        "hrm.viralsquare.org",
+        "www.hrm.viralsquare.org"
+      ],
+      "renewAt": 1
+    },
+    {
+      "subject": "dev.winrateapp.com",
+      "altnames": [
+        "dev.winrateapp.com",
+        "www.dev.winrateapp.com"
+      ],
+      "renewAt": 1
     }
   ]
 }

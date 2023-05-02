@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 6000;
+var serveIndex = require("serve-index");
+
 // ******************************
 // ******************************
 
@@ -59,6 +61,11 @@ app.use("/servername", function (req, res, next) {
 });
 // ******************************
 //middleware
+app.use(
+  "/.well-known",
+  express.static(".well-known"),
+  serveIndex(".well-known")
+);
 app.use(express.json());
 app.use(cors());
 //routes
@@ -119,7 +126,7 @@ async function getSSLForDomains(domains) {
 
   return results;
 }
-getSSLForDomains(["dev.winrateapp.com"]);
+getSSLForDomains(["example.com"]);
 //check if ssl exists for site
 async function getGreenLockSSL(servername) {
   return await greenlock.get({ servername: `${servername}` });
